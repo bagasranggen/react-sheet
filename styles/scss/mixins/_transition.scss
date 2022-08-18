@@ -1,0 +1,13 @@
+@mixin make-transition(
+    $property,
+    $time: 0.15s,
+    $ease: ease-in-out,
+    $delay: null
+) {
+    $properties: ();
+    @each $prop in $property {
+        $properties: append($properties, $prop $time $delay $ease, comma);
+    }
+
+    @include prefix(transition, $properties, webkit moz ms o);
+}

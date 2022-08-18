@@ -1,0 +1,52 @@
+%base-list {
+    list-style: none;
+    padding: 0 !important;
+}
+
+%base-nested-ordered {
+    list-style-type: decimal;
+
+    ol {
+        list-style: lower-alpha;
+
+        ol {
+            list-style: lower-roman;
+        }
+    }
+}
+
+%base-list-inline {
+    @extend %base-list, %base-footer-list, %d-inline-flex, %mb-0;
+
+    li {
+        line-height: 1.3;
+
+        &:not(:last-child) {
+            margin-right: 1rem;
+            padding-right: 1rem;
+        }
+    }
+}
+
+%base-list-inline-border {
+    @extend %base-list-inline;
+
+    li:not(:last-child) {
+        border-right: solid 0.1rem $white;
+    }
+}
+
+%base-list-spacing {
+    padding: 0 0 0 4rem !important;
+}
+
+%base-footer-list {
+    a {
+        color: $white;
+        @include make-transition(color);
+
+        @include hover() {
+            //color: $ad-l-secondary;
+        }
+    }
+}

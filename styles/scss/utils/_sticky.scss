@@ -1,0 +1,18 @@
+body {
+    &.nav-hide {
+        .sticky {
+            @include media-breakpoint-up(md) {
+                top: 3rem;
+            }
+        }
+    }
+
+    .sticky {
+        @include media-breakpoint-up(md) {
+            @include make-transition(top, $time: .25s, $delay: .45s);
+
+            position: sticky;
+            top: header-height('md') + 3rem;
+        }
+    }
+}

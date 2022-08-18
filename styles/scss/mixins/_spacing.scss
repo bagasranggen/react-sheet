@@ -1,0 +1,75 @@
+@include media-breakpoint-down(sm) {
+    %margin-top-max {
+        margin-top: $max !important;
+    }
+
+    %margin-bottom-max {
+        margin-bottom: $max !important;
+    }
+}
+
+@mixin make-spacing-y($space, $direction, $type: "positive") {
+    $t: if($type == "positive", "", "-");
+
+    @for $i from 1 through $space {
+        @if ($type == "positive" and $i >= 6) {
+            @each $breakpoint in map-keys($grid-breakpoints) {
+                $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+                .m#{$direction}-#{$i} {
+                    @if ($direction == "t") {
+                        @extend %margin-top-max;
+                    }
+                    @if ($direction == "b") {
+                        @extend %margin-bottom-max;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin padding-col($bp, $col: 1, $type: "x", $in-container: false) {
+    $col: if($col > 1, single-col($bp) * $col, single-col($bp));
+    $extra: if($in-container == false, 15px, 0);
+
+    @if ($type == "l") {
+        padding-left: $col + $extra;
+    } @else if ($type == "r") {
+        padding-right: $col + $extra;
+    } @else {
+        padding-left: $col + $extra;
+        padding-right: $col + $extra;
+    }
+}
+
+@mixin margin-col($bp, $col: 1, $type: "x") {
+    $col: if($col > 1, single-col($bp) * $col, single-col($bp));
+
+    @if ($type == "l") {
+        margin-left: $col;
+    } @else if ($type == "r") {
+        margin-right: $col;
+    } @else {
+        margin-left: $col;
+        margin-right: $col;
+    }
+}
+
+@mixin make-gutters($gutter: $grid-gutter-width, $breakpoints: $grid-breakpoints) {
+    @each $breakpoint in map-keys($breakpoints) {
+        $infix: breakpoint-infix($breakpoint, $breakpoints);
+
+        @each $key, $value in $gutters {
+            %g#{$infix}-#{$key},
+            %gx#{$infix}-#{$key} {
+                --#{$variable-prefix}gutter-x: #{$value};
+            }
+
+            %g#{$infix}-#{$key},
+            %gy#{$infix}-#{$key} {
+                --#{$variable-prefix}gutter-y: #{$value};
+            }
+        }
+    }
+}

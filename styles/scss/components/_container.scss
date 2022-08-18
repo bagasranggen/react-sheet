@@ -1,0 +1,33 @@
+.container {
+    &-slim {
+        &--1col {
+            @include make-container-slim();
+        }
+
+        &--2col {
+            @include make-container-slim(2);
+        }
+
+        &--3col {
+            @include make-container-slim(3);
+        }
+    }
+}
+
+.content {
+    &-slim {
+        &--1col {
+            @include make-container-slim($in-container: true);
+        }
+
+        &--2col {
+            @include make-container-slim(2, $in-container: true);
+        }
+    }
+
+    &-offset {
+        &--1col {
+            @include content-offset(1, 3);
+        }
+    }
+}

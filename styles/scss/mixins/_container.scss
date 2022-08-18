@@ -1,0 +1,42 @@
+@mixin content-offset($l, $r) {
+    @include media-breakpoint-up(lg) {
+        @include padding-col("lg", $l, "l", $in-container: true);
+        @include padding-col("lg", $r, "r", $in-container: true);
+    }
+    @include media-breakpoint-up(xl) {
+        @include padding-col("xl", $l, "l", $in-container: true);
+        @include padding-col("xl", $r, "r", $in-container: true);
+    }
+}
+
+@mixin make-container-slim($col: 1, $in-container: false) {
+    $size: if($col == 1, 1, $col);
+
+    @if ($in-container == false) {
+        @extend .container;
+    }
+
+    @include media-breakpoint-up(lg) {
+        @include padding-col("lg", $in-container: $in-container);
+    }
+
+    @include media-breakpoint-up(xl) {
+        @include padding-col("xl", $size, $in-container: $in-container);
+    }
+
+    @include media-breakpoint-up(xxl) {
+        @include padding-col("xxl", $size, $in-container: $in-container);
+    }
+}
+
+@mixin adjust-spacing-row($spacing, $bp: lg) {
+    @include media-breakpoint-up($bp) {
+        margin-left: -$spacing;
+        margin-right: -$spacing;
+
+        > [class*="col-"] {
+            padding-left: $spacing;
+            padding-right: $spacing;
+        }
+    }
+}

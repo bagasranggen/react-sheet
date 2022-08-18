@@ -1,0 +1,81 @@
+// Color
+
+
+// Reset
+$font-size-base: 1.6rem;
+
+// $headings-font-family:        null;
+// $headings-font-style:         null;
+// $headings-font-weight:        500;
+
+$line-height-base: 1.8;
+// $line-height-sm:              1.25;
+// $line-height-lg:              2;
+
+// $h1-font-size:                $font-size-base * 2.5;
+// $h2-font-size:                $font-size-base * 2;
+// $h3-font-size:                $font-size-base * 1.75;
+// $h4-font-size:                $font-size-base * 1.5;
+// $h5-font-size:                $font-size-base * 1.25;
+// $h6-font-size:                $font-size-base;
+
+// Spacing
+$spacing: 15;
+$max: 6rem;
+$spacer: 1rem !default;
+$spacers: make-space($spacing);
+
+// Grid Spacing
+$grid-gutter-width: 3rem !default;
+
+// Overlay
+$overlays: 6;
+
+// Navigation transition duration
+$nav-duration: 0.35s;
+
+// Banner full screen max height for screen > 1600px
+$banner-max-height: 85rem;
+
+// Measure to bottom of navigation
+$bottom-navigation: 0;
+
+// Breadcrumb
+$breadcrumb-padding-y: 1rem;
+$breadcrumb-divider: quote("\f054");
+
+// Pagination
+$pagination-bg: transparent;
+//$pagination-color: $ad-primary;
+$pagination-border-width: 0;
+$pagination-border-radius: 0;
+
+//$pagination-focus-color: $ad-primary;
+$pagination-focus-bg: transparent;
+
+//$pagination-hover-color: $ad-secondary;
+$pagination-hover-bg: transparent;
+
+//$pagination-active-color: $ad-secondary;
+$pagination-active-bg: transparent;
+
+// Modal
+//$btn-close-color: $ad-secondary;
+$btn-close-opacity: 1;
+$btn-close-hover-opacity: 0.5;
+$btn-close-focus-opacity: 1;
+
+$modal-header-border-width: 0;
+
+// Loader
+//$primary-loader: $ad-primary;
+$spinner-width: 4.5rem;
+$spinner-height: $spinner-width;
+
+// Heading Gradient
+$heading-gradient: 4;
+$heading-gradient-limit: $heading-gradient + 1;
+$heading-gradient-duration: 8;
+
+// Carousel
+$carousel-experiment-time: 4.3s;

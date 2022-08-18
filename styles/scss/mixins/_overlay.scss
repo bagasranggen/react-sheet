@@ -1,0 +1,20 @@
+@mixin overlay-x($type: "normal") {
+    $class: if($type == "normal", "", "gradient-");
+
+    @for $i from 1 through $overlays {
+
+        .oly-#{$class}-#{$i}0 {
+            @extend %base-overlay;
+        }
+
+        .oly-#{$class}-#{$i}0:before {
+            @extend %base-overlay-before;
+            @if ($type == "normal") {
+                background-color: rgba($black, $i/10);
+            } @else if ($type == "gradient") {
+                background: linear-gradient(to bottom, rgba($black, 0), rgba($black, $i/10));
+            }
+        }
+
+    }
+}

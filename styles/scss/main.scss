@@ -1,0 +1,42 @@
+@import "abstracts/functions";
+@import "abstracts/variables";
+
+// @import "../../../node_modules/bootstrap/scss/bootstrap";
+
+// Import needed components only
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/maps";
+@import "mixins";
+@import "utils/utilities";
+@import "../../node_modules/bootstrap/scss/utilities/api";
+@import "../../node_modules/bootstrap/scss/containers";
+
+//@import "vendor/slick";
+
+@import "mixins/overlay";
+@import "mixins/hover";
+@import "mixins/spacing";
+@import "mixins/transition";
+@import "mixins/prefix";
+@import "mixins/container";
+@import "mixins/typography";
+@import "mixins/button";
+@import "mixins/animation";
+
+@import "utils/grid";
+@import "utils/sticky";
+
+@import "base/reset";
+@import "base/typography";
+@import "base/spacing";
+@import "base/overlay";
+
+@import "layout/navigation";
+@import "layout/footer";
+
+@import "components/container";
+@import "components/button";
+@import "components/list";
+@import "components/modal";
+@import "components/page-builder";

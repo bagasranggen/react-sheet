@@ -1,0 +1,101 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    font-size: 62.5%;
+}
+
+body {
+    @extend %base-typography;
+    // font-size: 1.6rem;
+    // line-height: 1.8;
+    box-sizing: border-box;
+    //background-color: $ad-light;
+}
+
+html,
+body {
+    scroll-behavior: smooth;
+}
+
+/*To disable scrolling of content body on mobile when navigation active*/
+body.active {
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+/*Disable focus*/
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+    border: 0.1rem solid #ddd !important;
+    outline-offset: -0.2rem;
+    -webkit-appearance: checkbox !important;
+}
+
+input[type="file"]:focus {
+    outline: none !important;
+    -webkit-appearance: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+textarea:focus,
+input:focus {
+    outline: none !important;
+    -webkit-appearance: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+*:focus {
+    outline: none !important;
+    -webkit-appearance: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+/*Setting of paragraph*/
+p {
+    // font-size: 1.6rem;
+    // line-height: 1.6;
+    margin: 0 0 2.5rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+
+/*Reset ol, ul and dl margin-bottom*/
+ol,
+ul,
+dl {
+    &:not(:last-child) {
+        margin-bottom: 2.5rem;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/*Link colour setting for site-wide*/
+a {
+    text-decoration: none;
+    //color: $ad-secondary;
+}
+
+a:hover {
+    text-decoration: none;
+    //color: $ad-link-hover;
+}
+
+a:focus {
+    outline: 0 !important;
+}

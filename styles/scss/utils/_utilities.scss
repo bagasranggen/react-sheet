@@ -1,0 +1,428 @@
+// stylelint-disable indentation
+
+// Utilities
+
+$utilities: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$utilities: map-merge(
+    (
+        // scss-docs-start utils-overflow
+        "overflow":
+            (
+                property: overflow,
+                values: auto hidden visible scroll,
+            ),
+        // scss-docs-end utils-overflow
+        // scss-docs-start utils-display
+        "display":
+            (
+                responsive: true,
+                // print: true,
+                property: display,
+                class: d,
+                values: inline inline-block block grid table table-row
+                    table-cell flex inline-flex none,
+            ),
+        // scss-docs-end utils-display
+        // scss-docs-start utils-shadow
+        "shadow":
+            (
+                property: box-shadow,
+                class: shadow,
+                values: (
+                    null: $box-shadow,
+                    sm: $box-shadow-sm,
+                    lg: $box-shadow-lg,
+                    none: none,
+                ),
+            ),
+        // scss-docs-end utils-shadow
+        // scss-docs-start utils-position
+        "position":
+            (
+                property: position,
+                values: static relative absolute fixed sticky,
+            ),
+        // scss-docs-end utils-position
+        // scss-docs-start utils-borders
+        "border":
+            (
+                property: border,
+                values: (
+                    null: $border-width solid $border-color,
+                    0: 0,
+                ),
+            ),
+        "border-top": (
+            property: border-top,
+            values: (
+                null: $border-width solid $border-color,
+                0: 0,
+            ),
+        ),
+        "border-end": (
+            property: border-right,
+            class: border-end,
+            values: (
+                null: $border-width solid $border-color,
+                0: 0,
+            ),
+        ),
+        "border-bottom": (
+            property: border-bottom,
+            values: (
+                null: $border-width solid $border-color,
+                0: 0,
+            ),
+        ),
+        "border-start": (
+            property: border-left,
+            class: border-start,
+            values: (
+                null: $border-width solid $border-color,
+                0: 0,
+            ),
+        ),
+        // "border-color": (
+        //     property: border-color,
+        //     class: border,
+        //     values:
+        //         map-merge(
+        //             $theme-colors,
+        //             (
+        //                 "white": $white,
+        //             )
+        //         ),
+        // ),
+        // "border-width": (
+        //     property: border-width,
+        //     class: border,
+        //     values: $border-widths,
+        // ),
+        // scss-docs-end utils-sizing
+        // Flex utilities
+        // scss-docs-start utils-flex
+        "flex":
+            (
+                responsive: true,
+                property: flex,
+                values: (
+                    fill: 1 1 auto,
+                ),
+            ),
+        "flex-direction": (
+            responsive: true,
+            property: flex-direction,
+            class: flex,
+            values: row column row-reverse column-reverse,
+        ),
+        "flex-grow": (
+            responsive: true,
+            property: flex-grow,
+            class: flex,
+            values: (
+                grow-0: 0,
+                grow-1: 1,
+            ),
+        ),
+        "flex-shrink": (
+            responsive: true,
+            property: flex-shrink,
+            class: flex,
+            values: (
+                shrink-0: 0,
+                shrink-1: 1,
+            ),
+        ),
+        "flex-wrap": (
+            responsive: true,
+            property: flex-wrap,
+            class: flex,
+            values: wrap nowrap wrap-reverse,
+        ),
+        // "gap": (
+        //     responsive: true,
+        //     property: gap,
+        //     class: gap,
+        //     values: $spacers,
+        // ),
+        "justify-content":
+            (
+                responsive: true,
+                property: justify-content,
+                values: (
+                    start: flex-start,
+                    end: flex-end,
+                    center: center,
+                    between: space-between,
+                    around: space-around,
+                    evenly: space-evenly,
+                ),
+            ),
+        "align-items": (
+            responsive: true,
+            property: align-items,
+            values: (
+                start: flex-start,
+                end: flex-end,
+                center: center,
+                baseline: baseline,
+                stretch: stretch,
+            ),
+        ),
+        "align-content": (
+            responsive: true,
+            property: align-content,
+            values: (
+                start: flex-start,
+                end: flex-end,
+                center: center,
+                between: space-between,
+                around: space-around,
+                stretch: stretch,
+            ),
+        ),
+        "align-self": (
+            responsive: true,
+            property: align-self,
+            values: (
+                auto: auto,
+                start: flex-start,
+                end: flex-end,
+                center: center,
+                baseline: baseline,
+                stretch: stretch,
+            ),
+        ),
+        "order": (
+            responsive: true,
+            property: order,
+            values: (
+                first: -1,
+                0: 0,
+                1: 1,
+                2: 2,
+                3: 3,
+                4: 4,
+                5: 5,
+                last: 6,
+            ),
+        ),
+        // scss-docs-end utils-flex
+        // Margin utilities
+        // scss-docs-start utils-spacing
+        "margin":
+            (
+                // print: true,
+                responsive: true,
+                property: margin,
+                class: m,
+                values:
+                    map-merge(
+                        $spacers,
+                        (
+                            auto: auto,
+                        )
+                    )
+            ),
+        "margin-x": (
+            // print: true,
+            responsive: true,
+            property: margin-right margin-left,
+            class: mx,
+            values:
+                map-merge(
+                    $spacers,
+                    (
+                        auto: auto,
+                    )
+                )
+        ),
+        "margin-y": (
+            // print: true,
+            responsive: true,
+            property: margin-top margin-bottom,
+            class: my,
+            values:
+                map-merge(
+                    $spacers,
+                    (
+                        auto: auto,
+                    )
+                )
+        ),
+        "margin-top": (
+            // print: true,
+            responsive: true,
+            property: margin-top,
+            class: mt,
+            values:
+                map-merge(
+                    $spacers,
+                    (
+                        auto: auto,
+                    )
+                )
+        ),
+        "margin-end": (
+            // print: true,
+            responsive: true,
+            property: margin-right,
+            class: me,
+            values:
+                map-merge(
+                    $spacers,
+                    (
+                        auto: auto,
+                    )
+                )
+        ),
+        "margin-bottom": (
+            // print: true,
+            responsive: true,
+            property: margin-bottom,
+            class: mb,
+            values:
+                map-merge(
+                    $spacers,
+                    (
+                        auto: auto,
+                    )
+                )
+        ),
+        "margin-start": (
+            // print: true,
+            responsive: true,
+            property: margin-left,
+            class: ms,
+            values:
+                map-merge(
+                    $spacers,
+                    (
+                        auto: auto,
+                    )
+                )
+        ),
+        // Negative margin utilities
+        "negative-margin":
+            (
+                // print: true,
+                responsive: true,
+                property: margin,
+                class: m,
+                values: $negative-spacers
+            ),
+        "negative-margin-x": (
+            // print: true,
+            responsive: true,
+            property: margin-right margin-left,
+            class: mx,
+            values: $negative-spacers
+        ),
+        "negative-margin-y": (
+            // print: true,
+            responsive: true,
+            property: margin-top margin-bottom,
+            class: my,
+            values: $negative-spacers
+        ),
+        "negative-margin-top": (
+            // print: true,
+            responsive: true,
+            property: margin-top,
+            class: mt,
+            values: $negative-spacers
+        ),
+        "negative-margin-end": (
+            // print: true,
+            responsive: true,
+            property: margin-right,
+            class: me,
+            values: $negative-spacers
+        ),
+        "negative-margin-bottom": (
+            // print: true,
+            responsive: true,
+            property: margin-bottom,
+            class: mb,
+            values: $negative-spacers
+        ),
+        "negative-margin-start": (
+            // print: true,
+            responsive: true,
+            property: margin-left,
+            class: ms,
+            values: $negative-spacers
+        ),
+        // Padding utilities
+        // "padding":
+        //     (
+        //         responsive: true,
+        //         property: padding,
+        //         class: p,
+        //         values: $spacers,
+        //     ),
+        // "padding-x": (
+        //     responsive: true,
+        //     property: padding-right padding-left,
+        //     class: px,
+        //     values: $spacers,
+        // ),
+        // "padding-y": (
+        //     responsive: true,
+        //     property: padding-top padding-bottom,
+        //     class: py,
+        //     values: $spacers,
+        // ),
+        // "padding-top": (
+        //     responsive: true,
+        //     property: padding-top,
+        //     class: pt,
+        //     values: $spacers,
+        // ),
+        // "padding-end": (
+        //     responsive: true,
+        //     property: padding-right,
+        //     class: pe,
+        //     values: $spacers,
+        // ),
+        // "padding-bottom": (
+        //     responsive: true,
+        //     property: padding-bottom,
+        //     class: pb,
+        //     values: $spacers,
+        // ),
+        // "padding-start": (
+        //     responsive: true,
+        //     property: padding-left,
+        //     class: ps,
+        //     values: $spacers,
+        // ),
+        // scss-docs-end utils-spacing
+        // Text
+        // scss-docs-start utils-text
+        "font-size":
+            (
+                rfs: true,
+                property: font-size,
+                class: fs,
+                values: $font-sizes,
+            ),
+        "text-align": (
+            responsive: true,
+            property: text-align,
+            class: text,
+            values: (
+                start: left,
+                end: right,
+                center: center,
+            ),
+        ),
+        "text-transform": (
+            property: text-transform,
+            class: text,
+            values: lowercase uppercase capitalize,
+        )
+    ),
+    $utilities
+);

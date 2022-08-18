@@ -1,0 +1,5 @@
+.modal {
+    .btn-close {
+        @include make-transition(opacity);
+    }
+}
