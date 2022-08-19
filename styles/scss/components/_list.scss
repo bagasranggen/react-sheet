@@ -50,3 +50,85 @@
         }
     }
 }
+
+.list {
+    &-circle {
+        @extend %base-list;
+        width: $circle-base-width;
+        height: $circle-base-height;
+        border: solid $circle-border-width $circle-border-color;
+        border-radius: 100%;
+
+        > li {
+            @extend %position-absolute;
+            z-index: 1;
+            top: 0;
+            left: 50%;
+            height: 50%;
+            width: 1rem;
+            transform-origin: 0% 100%;
+
+            label {
+                cursor: pointer;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 1rem;
+                height: 1rem;
+                border-radius: 100%;
+                background-color: $circle-border-color-active;
+                transform: translate(-50%, -45%);
+
+                @include make-transition(transform);
+
+                @include media-breakpoint-up(md) {
+                    @include hover() {
+                        transform: translate(-50%, -45%) scale(1.5);
+                    }
+                }
+
+            }
+
+            input:checked + label {
+                transform: translate(-50%, -45%) scale(2);
+            }
+
+            &:not(:first-child) {
+                label {
+                    transform: translate(-55%, -50%) skewY(60deg);
+
+                    @include media-breakpoint-up(md) {
+                        @include hover() {
+                            transform: translate(-55%, -50%) skewY(60deg) scale(1.5);
+                        }
+                    }
+                }
+
+                input:checked + label {
+                    transform: translate(-55%, -50%) skewY(60deg) scale(2);
+                }
+
+                &:nth-child(even) {
+                    label:after {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: .5rem;
+                        height: .5rem;
+                        border-radius: 100%;
+                        background-color: $ep-primary;
+                        transform: translate(50%, 50%);
+                    }
+                }
+
+            }
+
+            @for $i from 1 through length($circle-points) {
+                &:nth-child(#{$i + 1}) {
+                    transform: rotate(nth($circle-points, $i)) skewY(-60deg);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+@mixin circle-progress($progress) {
+    .circle-summary {
+        @if $progress >= 6 {
+            &__progress {
+                clip: rect(auto, auto, auto, auto);
+            }
+        }
+
+        &__half {
+            &--left {
+                transform: rotate($progress * 30deg);
+            }
+
+            &--right {
+                @if $progress <= 6 {
+                    display: none;
+                } @else {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+}

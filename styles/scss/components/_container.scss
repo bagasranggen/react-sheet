@@ -12,6 +12,11 @@
             @include make-container-slim(3);
         }
     }
+
+    &--full-vh {
+        @extend %d-flex, %align-items-center, %justify-content-center;
+        min-height: 100vh;
+    }
 }
 
 .content {

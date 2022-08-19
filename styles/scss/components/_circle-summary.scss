@@ -1,0 +1,109 @@
+.circle-summary {
+    @extend %mx-auto;
+    width: $circle-base-width;
+    height: $circle-base-height;
+
+    .circle-summary {
+        &__wrapper {
+            @extend %position-relative;
+        }
+
+        &__label {
+            @extend %text-uppercase, %position-absolute;
+            z-index: 3;
+            background-color: $white;
+            padding: .5rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        &__progress,
+        &__half {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        &__progress {
+            clip: rect(0, $circle-base-width, $circle-base-width, $circle-base-width/2);
+        }
+
+        &__half {
+            @extend %position-absolute;
+            border-radius: 50%;
+            clip: rect(0, $circle-base-width/2, $circle-base-width, 0);
+            border: solid $circle-border-width $circle-border-color-active;
+        }
+
+        &__text {
+            @extend %position-absolute, %text-center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            p {
+                @extend %text-uppercase;
+                margin-bottom: 0;
+                font-weight: 600;
+            }
+
+            h1 {
+                @extend %d-flex, %align-items-center;
+                line-height: 1;
+                font-weight: 900;
+                font-size: 10rem;
+
+                small {
+                    font-weight: 400;
+                    font-size: 4rem;
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+
+        &__card {
+            h3 {
+                @extend %text-uppercase;
+                font-size: 1.6rem;
+            }
+
+            table {
+                background-color: $white;
+            }
+
+            th {
+                @extend %text-uppercase;
+                text-align: left;
+                font-size: 1.2rem;
+            }
+
+            td {
+                text-align: right;
+                font-weight: 600;
+            }
+
+            tr {
+                vertical-align: middle;
+
+                th, td {
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                }
+
+                &:last-child {
+                    th, td {
+                        border-bottom-width: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    @for $i from 1 through length($circle-points) {
+        &--#{$i} {
+            @include circle-progress($i);
+        }
+    }
+}

@@ -1,11 +1,11 @@
 %base-heading {
     //@extend %ff-poppins;
-    font-weight: 800;
+    font-weight: 700;
 }
 
 %base-typography {
-    //@extend %ff-ibm;
-    //color: $ad-dark;
+    color: $ep-primary;
+    font-family: "Nunito Sans", sans-serif;
 }
 
 h1,

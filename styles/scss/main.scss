@@ -24,6 +24,8 @@
 @import "mixins/button";
 @import "mixins/animation";
 
+@import "mixins/circle-summary";
+
 @import "utils/grid";
 @import "utils/sticky";
 
@@ -40,3 +42,5 @@
 @import "components/list";
 @import "components/modal";
 @import "components/page-builder";
+
+@import "components/circle-summary";

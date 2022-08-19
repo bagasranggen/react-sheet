@@ -1,5 +1,6 @@
 // Color
-
+$ep-primary: #262322;
+$ep-light: #F2E5D7;
 
 // Reset
 $font-size-base: 1.6rem;
@@ -79,3 +80,11 @@ $heading-gradient-duration: 8;
 
 // Carousel
 $carousel-experiment-time: 4.3s;
+
+// Circle Summary
+$circle-points: (30deg, 60deg, 90deg, 120deg, 150deg, 180deg, 210deg, 240deg, 270deg, 300deg, 330deg);
+$circle-base-width: 65rem;
+$circle-base-height: $circle-base-width;
+$circle-border-width: .2rem;
+$circle-border-color: transparentize(#FFF, .7);
+$circle-border-color-active: #FFF;

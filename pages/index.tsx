@@ -1,14 +1,30 @@
+import React from 'react';
+
 import type { NextPage } from 'next';
 
-const Home: NextPage = () => {
+import getExpenseData from '../libs/expense';
+
+import CircleSummary from '../components/common/circle/CircleSummary';
+
+export async function getStaticProps() {
+    const data = await getExpenseData();
+
+    return {
+        props: { data }
+    };
+}
+
+type HomeProps = NextPage & {
+    data: Array<any>;
+}
+
+const Home = ({ data }: HomeProps): React.ReactElement => {
     return (
-        <div className="container">
-            <h1>Lorem ipsum dolor sit.</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at dignissimos doloribus dolorum enim facilis illo inventore, laborum odio optio,
-                perferendis possimus
-                quod reiciendis saepe sit soluta sunt temporibus, voluptate.</p>
+        <div className="container container--full-vh">
+            <CircleSummary />
         </div>
     );
 };
 
 export default Home;
+

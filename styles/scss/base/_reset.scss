@@ -16,7 +16,7 @@ body {
     // font-size: 1.6rem;
     // line-height: 1.8;
     box-sizing: border-box;
-    //background-color: $ad-light;
+    background-color: $ep-light;
 }
 
 html,
@@ -33,7 +33,7 @@ body.active {
 /*Disable focus*/
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-    border: 0.1rem solid #ddd !important;
+    border: 0.1rem solid #DDD !important;
     outline-offset: -0.2rem;
     -webkit-appearance: checkbox !important;
 }
@@ -70,7 +70,6 @@ p {
         margin-bottom: 0;
     }
 }
-
 
 /*Reset ol, ul and dl margin-bottom*/
 ol,
