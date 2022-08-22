@@ -7,7 +7,7 @@ import getExpenseData from '../libs/expense';
 import CircleSummary from '../components/common/circle/CircleSummary';
 
 export async function getStaticProps() {
-    const data = await getExpenseData();
+    const data = await getExpenseData(2, 'summary');
 
     return {
         props: { data }
