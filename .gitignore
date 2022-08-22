@@ -35,3 +35,6 @@ yarn-error.log*
 
 # JetBrains IDE
 .idea/
+
+# Google Service Credentials
+secrets.json
