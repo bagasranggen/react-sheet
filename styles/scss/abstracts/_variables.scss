@@ -73,13 +73,16 @@ $modal-header-border-width: 0;
 $spinner-width: 4.5rem;
 $spinner-height: $spinner-width;
 
-// Heading Gradient
-$heading-gradient: 4;
-$heading-gradient-limit: $heading-gradient + 1;
-$heading-gradient-duration: 8;
+// Hamburger
+//$
 
-// Carousel
-$carousel-experiment-time: 4.3s;
+// Menu List Items
+$menu-list-items: 4;
+
+// Offcanvas
+$offcanvas-padding-x: 0;
+$offcanvas-horizontal-width: 100vw;
+$offcanvas-border-width: 0;
 
 // Circle Summary
 $circle-points: (30deg, 60deg, 90deg, 120deg, 150deg, 180deg, 210deg, 240deg, 270deg, 300deg, 330deg);

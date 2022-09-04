@@ -132,3 +132,63 @@
         }
     }
 }
+
+list {
+    @at-root .nav-#{&} {
+        @extend %base-list, %d-flex, %flex-column, %align-items-start;
+        pointer-events: none;
+
+        > li {
+            pointer-events: all;
+            line-height: 1.2;
+            font-size: 5rem;
+            font-weight: 800;
+
+            @include media-breakpoint-up(md) {
+                font-size: 10rem;
+            }
+
+            a {
+                @extend %position-relative, %d-block;
+                color: $ep-primary;
+
+                @include media-breakpoint-up(md) {
+                    @include make-transition(margin-left, .2s);
+                    @include hover() {
+                        margin-left: 2.5rem;
+                    }
+
+                    &:after {
+                        pointer-events: none;
+                        position: absolute;
+                        content: '';
+                        top: 0;
+                        right: 0;
+                        width: 110%;
+                        height: 100%;
+                        background-image: linear-gradient(to right, transparentize($white, 1), transparentize($white, 0));
+                        transform: translateX(100%);
+
+                        @include make-transition(transform, .6s);
+                    }
+                }
+
+            }
+
+        }
+
+        @include media-breakpoint-up(md) {
+            @include hover() {
+                > li:not(:hover) {
+                    a {
+                        &:after {
+                            transform: none;
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
+}

@@ -8,8 +8,14 @@ import '@fontsource/nunito-sans/900.css';
 import '../styles/scss/bootstrap.scss';
 import '../styles/scss/main.scss';
 
+import MainLayout from '../components/layout/mainLayout/MainLayout';
+
 function MyApp({ Component, pageProps }: AppProps) {
-    return <Component {...pageProps} />;
+    return (
+        <MainLayout>
+            <Component {...pageProps} />
+        </MainLayout>
+    );
 }
 
 export default MyApp;

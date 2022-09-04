@@ -1,110 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-export type CircleSummaryProps = {};
+import currencyToInt from '../../../utils/currencyToInt';
+import currencyConvert from '../../../utils/currencyConvert';
 
-const dummy = [
-    {
-        month: 'January',
-        income: 200000,
-        expense: 100000,
-        profit: 100000,
-        uri: 'jan-22',
-        tooltip: 'top'
-    },
-    {
-        month: 'February',
-        income: 200000,
-        expense: 100000,
-        profit: -100000,
-        uri: 'feb-22',
-        tooltip: 'top'
-    },
-    {
-        month: 'March',
-        income: 200000,
-        expense: 100000,
-        profit: 100000,
-        uri: 'mar-22',
-        tooltip: 'right'
-    },
-    {
-        month: 'April',
-        income: 200000,
-        expense: 100000,
-        profit: 100000,
-        uri: 'apr-22',
-        tooltip: 'right'
-    },
-    {
-        month: 'May',
-        income: 200000,
-        expense: 100000,
-        profit: 100000,
-        uri: 'may-22',
-        tooltip: 'right'
-    },
-    {
-        month: 'June',
-        income: 200000,
-        expense: 100000,
-        profit: 100000,
-        uri: 'jun-22',
-        tooltip: 'bottom'
-    },
-    {
-        month: 'July',
-        income: 200000,
-        expense: 100000,
-        profit: 100000,
-        uri: 'jul-22',
-        tooltip: 'bottom'
-    },
-    {
-        month: 'August',
-        income: 200000,
-        expense: 100000,
-        profit: 100000,
-        uri: 'aug-22',
-        tooltip: 'bottom'
-    },
-    {
-        month: 'September',
-        income: 200000,
-        expense: 100000,
-        profit: 100000,
-        uri: 'sep-22',
-        tooltip: 'left'
-    },
-    {
-        month: 'October',
-        income: 200000,
-        expense: 100000,
-        profit: 100000,
-        uri: 'oct-22',
-        tooltip: 'left'
-    },
-    {
-        month: 'November',
-        income: 200000,
-        expense: 100000,
-        profit: 100000,
-        uri: 'nov-22',
-        tooltip: 'left'
-    },
-    {
-        month: 'December',
-        income: 200000,
-        expense: 100000,
-        profit: 100000,
-        uri: 'dec-22',
-        tooltip: 'top'
-    },
-];
+export type CircleSummaryProps = {
+    summaryData: Array<any>;
+    month: number;
+};
 
-const CircleSummary = ({}: CircleSummaryProps): React.ReactElement => {
+const CircleSummary = ({ summaryData, month }: CircleSummaryProps): React.ReactElement => {
+    const router = useRouter();
+
     const currentMonth = new Date().getMonth() + 1;
-    const [ selectedMonth, setSelectedMonth ] = useState<number>(currentMonth - 1);
+    const [ selectedMonth, setSelectedMonth ] = useState<number>(month ? month : currentMonth - 1);
     const [ label, setLabel ] = useState<any>({
         isShow: false,
         isHovered: 0
@@ -112,6 +22,11 @@ const CircleSummary = ({}: CircleSummaryProps): React.ReactElement => {
     const [ mousePosition, setMousePosition ] = useState({
         top: 0,
         left: 0
+    });
+
+    let currentCash: number = 0;
+    summaryData.map((sm: any) => {
+        currentCash += currencyToInt(sm.profit);
     });
 
     const mouseMoveHandler = (e: any) => {
@@ -140,19 +55,22 @@ const CircleSummary = ({}: CircleSummaryProps): React.ReactElement => {
                     <div
                         className="circle-summary__label"
                         style={{ top: mousePosition.top - 35, left: mousePosition.left + 10 }}>
-                        {dummy[label.isHovered].month}
+                        {summaryData[label.isHovered].month}
                     </div>
                 )}
                 <div className="circle-summary__wrapper">
                     <ul className="list-circle">
-                        {dummy.map((m: any, i: number) => (
+                        {summaryData.map((m: any, i: number) => (
                             <li key={m.uri}>
                                 <input
                                     type="radio"
                                     name="expenses-summary"
                                     id={`expense${m.uri}`}
                                     defaultChecked={i === currentMonth}
-                                    onClick={() => setSelectedMonth(i)}
+                                    onClick={() => {
+                                        setSelectedMonth(i);
+                                        router.replace({ query: { month: i } }, '', { shallow: true });
+                                    }}
                                     value={i}
                                     hidden />
                                 <label
@@ -170,32 +88,31 @@ const CircleSummary = ({}: CircleSummaryProps): React.ReactElement => {
                 <div className="mt-5 circle-summary__text">
                     <p>Current Cash</p>
                     <h1>
-                        <small>Rp</small>
-                        12,000,000
+                        <small>{currentCash < 0 ? '-' : ''}Rp</small>{currencyConvert(currentCash)}
                     </h1>
                     <div className="mt-3 circle-summary__card">
-                        <h3 className="mb-1">{dummy[selectedMonth].month}&apos;s Cash-flow</h3>
+                        <h3 className="mb-1">{summaryData[selectedMonth].month}&apos;s Cash-flow</h3>
                         <div className="row justify-content-center">
-                            <div className="col-md-4">
+                            <div className={`col-md-${summaryData[selectedMonth].income !== 'Rp0' || summaryData[selectedMonth].expense !== 'Rp0' || summaryData[selectedMonth].profit !== 'Rp0' ? 'auto' : '4'}`}>
                                 <table className="table table-responsive">
                                     <tbody>
                                     <tr>
                                         <th>Income</th>
-                                        <td className="text-primary">{dummy[selectedMonth].income}</td>
+                                        <td className="text-primary">{summaryData[selectedMonth].income}</td>
                                     </tr>
                                     <tr>
                                         <th>Expense</th>
-                                        <td className="text-danger">{dummy[selectedMonth].expense}</td>
+                                        <td className="text-danger">{summaryData[selectedMonth].expense}</td>
                                     </tr>
                                     <tr>
                                         <th>Profit</th>
-                                        <td className={`text-${dummy[selectedMonth].profit > 0 ? 'primary' : 'danger'}`}>{dummy[selectedMonth].profit}</td>
+                                        <td className={`text-${currencyToInt(summaryData[selectedMonth].profit) >= 0 ? 'primary' : 'danger'}`}>{summaryData[selectedMonth].profit}</td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <Link href={`/monthly/${dummy[selectedMonth].uri}`}>
+                        <Link href={summaryData[selectedMonth].url}>
                             <a className="btn btn-primary">Detail</a>
                         </Link>
                     </div>

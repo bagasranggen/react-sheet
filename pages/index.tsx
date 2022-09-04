@@ -6,22 +6,26 @@ import getExpenseData from '../libs/expense';
 
 import CircleSummary from '../components/common/circle/CircleSummary';
 
-export async function getStaticProps() {
-    const data = await getExpenseData(2, 'summary');
+export async function getServerSideProps({ query }: any) {
+    const month = query?.month ? query.month : 0;
+    const data = await getExpenseData(1, 'summary');
 
     return {
-        props: { data }
+        props: { data, month }
     };
 }
 
 type HomeProps = NextPage & {
     data: Array<any>;
-}
+    month: number;
+};
 
-const Home = ({ data }: HomeProps): React.ReactElement => {
+const Home = ({ data, month }: HomeProps): React.ReactElement => {
     return (
         <div className="container container--full-vh">
-            <CircleSummary />
+            <CircleSummary
+                summaryData={data}
+                month={month} />
         </div>
     );
 };

@@ -1,0 +1,55 @@
+.offcanvas {
+    &.offcanvas {
+        &-fade {
+
+            top: unset;
+            bottom: 0;
+            height: calc(100vh - 6rem);
+
+            &[class*='offcanvas-'] {
+                transform: none;
+                opacity: 0;
+            }
+
+            &:not(.show) {
+                @include make-transition(opacity, .25s);
+            }
+
+            &.show {
+                @include make-transition(opacity, .5s, $delay: .75s);
+                opacity: 1;
+            }
+
+            .nav-list {
+                li {
+                    overflow: hidden;
+
+                    span {
+                        display: block;
+                        transform: translateY(100%);
+
+                    }
+
+                    @for $i from 1 through $menu-list-items {
+                        &:nth-child(#{$i}) {
+                            span {
+                                @include make-transition(transform, .45s, $delay: if($i == 1, 0s, #{$i * 0.05}s));
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.is-opened {
+                .nav-list {
+                    li {
+                        span {
+                            transform: none;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
