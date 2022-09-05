@@ -8,14 +8,15 @@
             @extend %position-relative;
         }
 
-        &__label {
-            @extend %text-uppercase, %position-absolute;
-            z-index: 3;
-            background-color: $white;
-            padding: .5rem 1.5rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
+        // &__label {
+        //     @extend %text-uppercase, %position-absolute;
+        //     display: none;
+        //     z-index: 3;
+        //     background-color: $white;
+        //     padding: .5rem 1.5rem;
+        //     font-size: 1.2rem;
+        //     font-weight: 600;
+        // }
 
         &__progress,
         &__half {
@@ -64,6 +65,16 @@
         }
 
         &__card {
+            @extend %position-absolute;
+            background-color: $white;
+            padding: 1rem;
+            z-index: 3;
+            pointer-events: none;
+
+            &:not(.circle-summary__card--show) {
+                opacity: 0;
+            }
+
             h3 {
                 @extend %text-uppercase;
                 font-size: 1.6rem;
@@ -73,27 +84,43 @@
                 background-color: $white;
             }
 
+            tbody {
+                tr {
+                    line-height: 1;
+
+                    td {
+                        padding-top: 0;
+                        padding-bottom: 0;
+
+                        &:not(:last-child) {
+                            border-right: solid 1px transparentize($black, 0.7)
+                        }
+                    }
+                }
+            }
+
             th {
                 @extend %text-uppercase;
-                text-align: left;
                 font-size: 1.2rem;
+                padding: 0
             }
 
             td {
-                text-align: right;
                 font-weight: 600;
             }
 
             tr {
                 vertical-align: middle;
 
-                th, td {
+                td {
                     padding-left: 1rem;
                     padding-right: 1rem;
                 }
 
                 &:last-child {
-                    th, td {
+
+                    th,
+                    td {
                         border-bottom-width: 0;
                     }
                 }

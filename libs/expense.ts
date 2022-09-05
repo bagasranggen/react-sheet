@@ -39,6 +39,7 @@ const getExpenseData = async (id: number, type: string) => {
                         month: row?.month ? row.month : '',
                         uri: uri ? uri : '',
                         url: uri ? `/monthly/${uri}` : '',
+                        align: row?.align ? row.align : '',
                         income: row?.income ? row.income : 'Rp0',
                         expense: row?.expense ? row.expense : 'Rp0',
                         profit: row?.profit ? row.profit : 'Rp0',
@@ -67,7 +68,7 @@ const getExpenseData = async (id: number, type: string) => {
 
 
                     if (!data.detail[title]?.length) {
-                        data.detail[title] = [ getDetailData(row) ];
+                        data.detail[title] = [getDetailData(row)];
                     } else {
                         data.detail[title].push(getDetailData(row));
                     }
