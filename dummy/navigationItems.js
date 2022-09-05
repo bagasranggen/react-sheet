@@ -4,17 +4,17 @@ const navigationItems = [
 		uri: '/'
 	},
 	{
-		label: 'Services',
-		uri: '/'
+		label: 'Events',
+		uri: '/events'
 	},
-	{
-		label: 'About Us',
-		uri: '/'
-	},
-	{
-		label: 'Contact',
-		uri: '/'
-	},
+	// {
+	// 	label: 'About Us',
+	// 	uri: '/'
+	// },
+	// {
+	// 	label: 'Contact',
+	// 	uri: '/'
+	// },
 ];
 
 export default navigationItems;

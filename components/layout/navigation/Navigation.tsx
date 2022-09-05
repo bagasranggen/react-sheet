@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
-
 
 import navigationItems from '../../../dummy/navigationItems';
 
@@ -10,17 +10,28 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 
 export type NavigationProps = {};
 
-const Navigation = ({}: NavigationProps): React.ReactElement => {
+const Navigation = ({ }: NavigationProps): React.ReactElement => {
+    const router = useRouter()
 
-    const [ show, setShow ] = useState(false);
-    const [ isOpened, setIsOpened ] = useState(false);
+    const [show, setShow] = useState(false);
+    const [isOpened, setIsOpened] = useState(false);
+    const [navIsClicked, setNavIsClicked] = useState(false);
 
     const handleClose = () => {
         setIsOpened(false);
-        // setShow(false);
         setTimeout(() => setShow(false), ((navigationItems.length - 1) * 50 + 450));
     };
+
     const handleShow = () => setShow(true);
+
+    useEffect(() => {
+        const loadCompleteHandler = () => {
+            handleClose();
+            setNavIsClicked(false);
+        }
+
+        if (show) router.events.on('routeChangeComplete', loadCompleteHandler)
+    }, [router.events, navIsClicked])
 
     return (
         <>
@@ -71,7 +82,7 @@ const Navigation = ({}: NavigationProps): React.ReactElement => {
                             {navigationItems.map((n: any) => (
                                 <li key={n.label}>
                                     <Link href={n.uri}>
-                                        <a onClick={() => handleClose()}><span>{n.label}</span></a>
+                                        <a onClick={() => setNavIsClicked(true)}><span>{n.label}</span></a>
                                     </Link>
                                 </li>
                             ))}
