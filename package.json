@@ -13,12 +13,14 @@
     "bootstrap": "^5.2.0",
     "google-spreadsheet": "^3.3.0",
     "next": "12.2.5",
+    "nprogress": "^0.2.0",
     "react": "18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/node": "^18.7.6",
+    "@types/nprogress": "^0.2.0",
     "@types/react": "18.0.17",
     "@types/react-dom": "^18.0.6",
     "eslint": "8.22.0",
