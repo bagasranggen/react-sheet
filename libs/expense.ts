@@ -15,7 +15,7 @@ const getExpenseData = async (id: number, type: string) => {
         await doc.useServiceAccountAuth(process?.env?.GOOGLE_APPLICATION_CREDENTIALS ? JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS) : '');
         // await doc.useServiceAccountAuth(creds);
         await doc.loadInfo(); // loads document properties and worksheets
-        const sheet = doc.sheetsByIndex[id]; // or use doc.sheetsById[id] -- get first sheet in the document
+        const sheet = doc.sheetsByIndex[ id ]; // or use doc.sheetsById[id] -- get first sheet in the document
 
         const rows = await sheet.getRows(); // return the rows from the 1st sheet
 
@@ -24,7 +24,7 @@ const getExpenseData = async (id: number, type: string) => {
                 const configData: any = {};
 
                 rows.map((row: any) => {
-                    configData[row.sheet] = { id: row.id, label: row.label };
+                    configData[ row.sheet ] = { id: row.id, label: row.label };
                 });
 
                 return configData;
@@ -58,7 +58,6 @@ const getExpenseData = async (id: number, type: string) => {
                 rows.map((row: any) => {
                     const title = row.title.toLowerCase().replace(/ /g, '_');
 
-
                     const getDetailData = (data: any) => ({
                         date: data.date,
                         title: data.title,
@@ -66,11 +65,10 @@ const getExpenseData = async (id: number, type: string) => {
                         cashFlow: data?.income ? currencyToInt(data.income) : (data?.charge ? (currencyToInt(data.charge) + currencyToInt(data.expense)) : currencyToInt(data.expense)),
                     });
 
-
-                    if (!data.detail[title]?.length) {
-                        data.detail[title] = [getDetailData(row)];
+                    if (!data.detail[ title ]?.length) {
+                        data.detail[ title ] = [ getDetailData(row) ];
                     } else {
-                        data.detail[title].push(getDetailData(row));
+                        data.detail[ title ].push(getDetailData(row));
                     }
 
                     data.total.income += (row?.income) ? currencyToInt(row.income) : 0;
