@@ -35,10 +35,10 @@
         &[aria-expanded='true'] {
             .menu-toggle {
                 &:before {
-                    transform: scale(85);
+                    transform: scale(100);
 
                     @include media-breakpoint-up(lg) {
-                        transform: translate(-50%, -50%) scale(85);
+                        transform: translate(-50%, -50%) scale(100);
                     }
                 }
             }
