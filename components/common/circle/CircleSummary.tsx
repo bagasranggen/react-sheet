@@ -131,36 +131,33 @@ const CircleSummary = ({ summaryData, month }: CircleSummaryProps): React.ReactE
                                     key={'mobile-' + m.uri}
                                     href={m.url}>
                                     <li>
-                                        <div className="row align-items-center">
-                                            <div className="col">
-                                                <h2>{m.month}</h2>
-                                                <table className="mb-0 table table-sm table-responsive">
-                                                    <thead>
-                                                    <tr>
-                                                        <th style={{ width: '33.33%' }} />
-                                                        <th style={{ width: '33.33%' }} />
-                                                        <th style={{ width: '33.33%' }} />
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td className="text-success">{currencyConvert(summaryData[i].income, 'Rp')}</td>
-                                                        <td className="text-danger">{currencyConvert(summaryData[i].expense, 'Rp', true)}</td>
-                                                        <td className={`text-${summaryData[i].isProfit ? 'success' : 'danger'}`}>{currencyConvert(summaryData[i].profit, 'Rp', !summaryData[i].isProfit)}</td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div className="col-auto d-flex">
-                                                <Image
-                                                    src={chevron}
-                                                    alt={m.month}
-                                                    width={20}
-                                                    height={30}
-                                                    layout="fixed" />
-                                            </div>
+                                        <div className="mb-1 d-flex align-items-center">
+                                            <h2 className="mb-0 me-1">{m.month}</h2>
+                                            <Image
+                                                src={chevron}
+                                                alt={m.month}
+                                                width={12}
+                                                height={22}
+                                                layout="fixed" />
                                         </div>
-
+                                        <div className="table-responsive">
+                                            <table className="mb-0 table table-sm">
+                                                <thead>
+                                                <tr>
+                                                    <th style={{ width: '33.33%' }} />
+                                                    <th style={{ width: '33.33%' }} />
+                                                    <th style={{ width: '33.33%' }} />
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td className="text-success">{currencyConvert(summaryData[i].income, 'Rp')}</td>
+                                                    <td className="text-danger">{currencyConvert(summaryData[i].expense, 'Rp', true)}</td>
+                                                    <td className={`text-${summaryData[i].isProfit ? 'success' : 'danger'}`}>{currencyConvert(summaryData[i].profit, 'Rp', !summaryData[i].isProfit)}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </li>
                                 </Link>
                             ))}
