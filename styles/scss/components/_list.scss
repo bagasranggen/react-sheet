@@ -54,10 +54,13 @@
 .list {
     &-circle {
         @extend %base-list;
-        width: $circle-base-width;
-        height: $circle-base-height;
         border: solid $circle-border-width $circle-border-color;
         border-radius: 100%;
+
+        @include media-breakpoint-up(lg) {
+            width: $circle-base-width;
+            height: $circle-base-height;
+        }
 
         > li {
             @extend %position-absolute;
@@ -117,7 +120,7 @@
                         width: .5rem;
                         height: .5rem;
                         border-radius: 100%;
-                        background-color: $ep-primary;
+                        background-color: $white;
                         transform: translate(50%, 50%);
                     }
                 }
@@ -150,7 +153,7 @@ list {
 
             a {
                 @extend %position-relative, %d-block;
-                color: $ep-primary;
+                color: $ep-dark;
 
                 @include media-breakpoint-up(md) {
                     @include make-transition(margin-left, .2s);

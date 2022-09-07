@@ -1,6 +1,12 @@
 // Color
-$ep-primary: #262322;
-$ep-light: #F2E5D7;
+$ep-primary: #FFB968;
+$ep-dark: #354A5B;
+$ep-light: #F6F6F6;
+
+// Utility Color
+$blue: #75BFFE;
+$green: #22BEAD;
+$red: #FA818A;
 
 // Reset
 $font-size-base: 1.6rem;
@@ -73,8 +79,21 @@ $modal-header-border-width: 0;
 $spinner-width: 4.5rem;
 $spinner-height: $spinner-width;
 
-// Hamburger
-//$
+// Accordion
+$accordion-padding-y: 1.75rem;
+$accordion-padding-x: 1.5rem;
+$accordion-body-padding-y: 0;
+$accordion-body-padding-x: 0;
+$accordion-border-width: 0;
+$accordion-border-radius: 0;
+$accordion-button-active-bg: #FFF;
+$accordion-button-active-color: $ep-dark;
+$accordion-transition: all .15s ease;
+
+// Table
+$table-striped-bg: transparentize($ep-light, .5);
+$table-cell-padding-y: 1.25rem;
+$table-cell-padding-x: 1.5rem;
 
 // Menu List Items
 $menu-list-items: 4;
@@ -89,5 +108,5 @@ $circle-points: (30deg, 60deg, 90deg, 120deg, 150deg, 180deg, 210deg, 240deg, 27
 $circle-base-width: 65rem;
 $circle-base-height: $circle-base-width;
 $circle-border-width: .2rem;
-$circle-border-color: transparentize(#FFF, .7);
-$circle-border-color-active: #FFF;
+$circle-border-color: transparentize(#FFF, .3);
+$circle-border-color-active: $ep-primary;

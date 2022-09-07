@@ -1,22 +1,15 @@
 .circle-summary {
-    @extend %mx-auto;
-    width: $circle-base-width;
-    height: $circle-base-height;
+    @extend %mx-lg-auto, %mt-1, %mt-lg-0;
+
+    @include media-breakpoint-up(lg) {
+        width: $circle-base-width;
+        height: $circle-base-height;
+    }
 
     .circle-summary {
         &__wrapper {
             @extend %position-relative;
         }
-
-        // &__label {
-        //     @extend %text-uppercase, %position-absolute;
-        //     display: none;
-        //     z-index: 3;
-        //     background-color: $white;
-        //     padding: .5rem 1.5rem;
-        //     font-size: 1.2rem;
-        //     font-weight: 600;
-        // }
 
         &__progress,
         &__half {
@@ -39,10 +32,16 @@
         }
 
         &__text {
-            @extend %position-absolute, %text-center;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            @extend %text-center;
+
+            @include media-breakpoint-up(lg) {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+                margin-top: 2.5rem;
+            }
 
             p {
                 @extend %text-uppercase;
@@ -51,15 +50,31 @@
             }
 
             h1 {
-                @extend %d-flex, %align-items-center;
+                @extend %d-flex, %align-items-center, %justify-content-center;
                 line-height: 1;
+                font-size: 5rem;
                 font-weight: 900;
-                font-size: 10rem;
+
+                @include media-breakpoint-up(md) {
+                    font-size: 6.5rem;
+                }
+
+                @include media-breakpoint-up(lg) {
+                    font-size: 10rem;
+                }
 
                 small {
                     font-weight: 400;
-                    font-size: 4rem;
+                    font-size: 2rem;
                     margin-bottom: 1rem;
+
+                    @include media-breakpoint-up(md) {
+                        font-size: 2.5rem;
+                    }
+
+                    @include media-breakpoint-up(lg) {
+                        font-size: 4rem;
+                    }
                 }
             }
         }
@@ -122,6 +137,48 @@
                     th,
                     td {
                         border-bottom-width: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    &__list {
+        @extend %base-list;
+
+        li {
+            background-color: $white;
+            padding: 1rem 1.5rem;
+
+            &:not(:last-child) {
+                border-bottom: solid .1rem transparentize($ep-dark, .9);
+            }
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 400;
+        }
+
+        table {
+            thead {
+                th {
+                    &:empty {
+                        border: none;
+                        padding: 0;
+                    }
+                }
+            }
+
+            tbody {
+                td {
+                    @extend %text-center;
+                    border-bottom: none;
+                    line-height: 1;
+                    font-size: 1.3rem;
+
+                    &:not(:last-child) {
+                        border-right: solid .1rem transparentize($ep-dark, .7);
                     }
                 }
             }

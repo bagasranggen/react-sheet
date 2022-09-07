@@ -10,12 +10,12 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 
 export type NavigationProps = {};
 
-const Navigation = ({ }: NavigationProps): React.ReactElement => {
-    const router = useRouter()
+const Navigation = ({}: NavigationProps): React.ReactElement => {
+    const router = useRouter();
 
-    const [show, setShow] = useState(false);
-    const [isOpened, setIsOpened] = useState(false);
-    const [navIsClicked, setNavIsClicked] = useState(false);
+    const [ show, setShow ] = useState(false);
+    const [ isOpened, setIsOpened ] = useState(false);
+    const [ navIsClicked, setNavIsClicked ] = useState(false);
 
     const handleClose = () => {
         setIsOpened(false);
@@ -28,10 +28,10 @@ const Navigation = ({ }: NavigationProps): React.ReactElement => {
         const loadCompleteHandler = () => {
             handleClose();
             setNavIsClicked(false);
-        }
+        };
 
-        if (show) router.events.on('routeChangeComplete', loadCompleteHandler)
-    }, [router.events, navIsClicked])
+        if (show) router.events.on('routeChangeComplete', loadCompleteHandler);
+    }, [ router.events, navIsClicked ]);
 
     return (
         <>
@@ -58,13 +58,7 @@ const Navigation = ({ }: NavigationProps): React.ReactElement => {
                         aria-expanded={show ? 'true' : 'false'}
                         aria-label="Toggle navigation"
                         onClick={show ? handleClose : handleShow}>
-                        <div className="menu-toggle">
-                            {/*<div className="menu-toggle__text">*/}
-                            {/*    <div>Menu</div>*/}
-                            {/*    <div>Close</div>*/}
-                            {/*</div>*/}
-                            <div className="menu-toggle__icon" />
-                        </div>
+                        <div className="menu-toggle" />
                     </button>
 
                 </div>
@@ -77,7 +71,7 @@ const Navigation = ({ }: NavigationProps): React.ReactElement => {
                 onEntered={() => setIsOpened(true)}
                 onHide={handleClose}>
                 <Offcanvas.Body>
-                    <div className="mt-10 container">
+                    <div className="mt-lg-10 container">
                         <ul className="nav-list">
                             {navigationItems.map((n: any) => (
                                 <li key={n.label}>

@@ -4,7 +4,7 @@
 }
 
 %base-typography {
-    color: $ep-primary;
+    color: $ep-dark;
     font-family: "Nunito Sans", sans-serif;
 }
 
@@ -47,10 +47,5 @@ h5 {
 
     h3 {
         font-size: 2.7rem;
-    }
-
-    h4,
-    h5 {
-        font-size: 2.3rem;
     }
 }

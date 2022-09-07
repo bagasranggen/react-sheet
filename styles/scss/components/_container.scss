@@ -14,8 +14,11 @@
     }
 
     &--full-vh {
-        @extend %d-flex, %align-items-center, %justify-content-center;
-        min-height: calc(100vh - 6.5rem);
+        @extend %d-lg-flex, %align-items-lg-center, %justify-content-lg-center;
+
+        @include media-breakpoint-up(lg) {
+            min-height: calc(100vh - 6.5rem);
+        }
     }
 }
 

@@ -1,0 +1,36 @@
+.accordion {
+    &-item {
+        &:not(:last-child) {
+            border-bottom: solid 1px $ep-light;
+        }
+    }
+
+    &-body {
+        table {
+            thead {
+                th:empty {
+                    padding: 0;
+                }
+            }
+        }
+    }
+
+    &-header {
+        h4 {
+            @extend %mb-0;
+            font-weight: 400;
+        }
+    }
+
+    &--is-focus {
+        .accordion {
+            &-item {
+                &:not(.accordion-item--is-focus) {
+                    button {
+                        opacity: .15;
+                    }
+                }
+            }
+        }
+    }
+}

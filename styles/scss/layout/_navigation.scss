@@ -12,17 +12,23 @@
             @include make-transition(transform, 1s);
 
             &:before {
-                @extend %position-absolute;
+                position: fixed;
+                top: -4rem;
+                right: -4rem;
                 content: '';
-                top: 50%;
-                left: 50%;
                 width: 4rem;
                 height: 4rem;
                 border-radius: 100%;
                 background-color: #FFF;
-                transform: translate(-50%, -50%);
                 z-index: -1;
                 @include make-transition(transform, .75s);
+
+                @include media-breakpoint-up(lg) {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
             }
         }
 
@@ -30,6 +36,10 @@
             .menu-toggle {
                 &:before {
                     transform: scale(85);
+
+                    @include media-breakpoint-up(lg) {
+                        transform: translate(-50%, -50%) scale(85);
+                    }
                 }
             }
         }

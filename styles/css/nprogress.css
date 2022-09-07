@@ -1,0 +1,8 @@
+#nprogress .bar {
+    background: #FFB968;
+}
+
+/* Fancy blur effect */
+#nprogress .peg {
+    box-shadow: 0 0 10px #FFB968, 0 0 5px #FFB968;
+}
