@@ -18,7 +18,9 @@ type EventsProps = NextPage & {
 };
 
 const Events = ({ data }: EventsProps): React.ReactElement => (
-    <DetailPage title='Detail by Events' data={data} />
+    <DetailPage
+        title="Detail By Events"
+        data={data} />
 );
 
 export default Events;

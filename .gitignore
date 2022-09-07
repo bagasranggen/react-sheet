@@ -38,3 +38,4 @@ yarn-error.log*
 
 # Google Service Credentials
 secrets.json
+secrets-korekayu.json

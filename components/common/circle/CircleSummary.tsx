@@ -68,7 +68,7 @@ const CircleSummary = ({ summaryData, month }: CircleSummaryProps): React.ReactE
     }, [ selectedMonth ]);
 
     return (
-        <div className={`circle-summary${currentMonth > 1 ? ` circle-summary--${currentMonth}` : ''}`}>
+        <div className={`circle-summary${currentMonth > 1 ? ` circle-summary--${currentMonth - 1}` : ''}`}>
 
             {screen > 992 && (
                 <>
@@ -83,7 +83,7 @@ const CircleSummary = ({ summaryData, month }: CircleSummaryProps): React.ReactE
                                             type="radio"
                                             name="expenses-summary"
                                             id={`expense${m.uri}`}
-                                            defaultChecked={i === currentMonth}
+                                            defaultChecked={i === (currentMonth - 1)}
                                             value={i}
                                             hidden />
                                         <label
