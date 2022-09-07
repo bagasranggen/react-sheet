@@ -1,6 +1,5 @@
 // @ts-ignore
 import { GoogleSpreadsheet } from 'google-spreadsheet';
-import creds from '../secrets.json';
 import currencyToInt from '../utils/currencyToInt';
 
 // credentials you have generated when creating the service account. TIP: DO NOT check this into your Git repo and it to your .gitignore file
@@ -13,7 +12,6 @@ const getExpenseData = async (id: number, type: string) => {
     try {
         // google sheets
         await doc.useServiceAccountAuth(process?.env?.GOOGLE_APPLICATION_CREDENTIALS ? JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS) : '');
-        // await doc.useServiceAccountAuth(creds);
         await doc.loadInfo(); // loads document properties and worksheets
         const sheet = doc.sheetsByIndex[id]; // or use doc.sheetsById[id] -- get first sheet in the document
 
