@@ -38,7 +38,7 @@ const DetailPage = ({ title, data }: DetailPageProps): React.ReactElement => {
                     </div>
                 </div>
 
-                {data?.detail ? (
+                {Object.keys(data.detail).length > 0 ? (
                     <Accordion className={`my-2${isOpened !== '' ? ' accordion--is-focus' : ''}`}>
                         {Object?.keys(data.detail).map((key: any) => {
                             let summary = { income: 0, expense: 0 };
