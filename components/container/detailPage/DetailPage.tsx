@@ -28,15 +28,17 @@ const DetailPage = ({ title, data }: DetailPageProps): React.ReactElement => {
                         <h1 className="mb-0">{title}</h1>
                     </div>
                     <div className="col-md-auto text-md-end">
-                        <h3 className={`mb-0 fw-normal fs-${screen < 992 ? '4' : '3'}`}>
-                            <span className="text-success">{data.total?.income && currencyConvert(data.total.income, 'Rp')}</span>
-                            {(data.total?.income && data.total?.expense) && <>&nbsp;|&nbsp;</>}
-                            <span className="text-danger">{data.total?.expense && currencyConvert(data.total.expense, 'Rp', true)}</span>
-                        </h3>
+                        {(data.total?.income && data.total?.expense) ? (
+                            <h3 className={`mb-0 fw-normal fs-${screen < 992 ? '4' : '3'}`}>
+                                <span className="text-success">{currencyConvert(data.total.income, 'Rp')}</span>
+                                <>&nbsp;|&nbsp;</>
+                                <span className="text-danger">{currencyConvert(data.total.expense, 'Rp', true)}</span>
+                            </h3>
+                        ) : null}
                     </div>
                 </div>
 
-                {data?.detail && (
+                {data?.detail ? (
                     <Accordion className={`my-2${isOpened !== '' ? ' accordion--is-focus' : ''}`}>
                         {Object?.keys(data.detail).map((key: any) => {
                             let summary = { income: 0, expense: 0 };
@@ -83,6 +85,8 @@ const DetailPage = ({ title, data }: DetailPageProps): React.ReactElement => {
                             );
                         })}
                     </Accordion>
+                ) : (
+                    <h2 className="my-3 text-center">No data found</h2>
                 )}
             </div>
         </>
