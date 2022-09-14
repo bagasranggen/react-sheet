@@ -8,7 +8,7 @@ export type HeaderTitleProps = {
 
 const HeaderTitle = ({ title, homepage }: HeaderTitleProps): React.ReactElement => (
     <Head>
-        <title>{title}{!homepage ? ` | ${process.env.WEB_NAME} Fee Report` : ''}</title>
+        <title>{`${title}${!homepage ? ` | ${process.env.WEB_NAME} Fee Report` : ''}`}</title>
     </Head>
 );
 

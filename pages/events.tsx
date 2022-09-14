@@ -5,11 +5,12 @@ import getExpenseData from '../libs/expense';
 
 import DetailPage from '../components/container/detailPage/DetailPage';
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const data = await getExpenseData(2, 'detail');
 
     return {
-        props: { data }
+        props: { data },
+        revalidate: 60,
     };
 }
 

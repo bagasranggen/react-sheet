@@ -9,14 +9,13 @@ import chevron from '../../../assets/icon/chevron-right-dark.svg';
 
 export type CircleSummaryProps = {
     summaryData: Array<any>;
-    month: number;
 };
 
-const CircleSummary = ({ summaryData, month }: CircleSummaryProps): React.ReactElement => {
+const CircleSummary = ({ summaryData }: CircleSummaryProps): React.ReactElement => {
     const screen = screenResize();
     const currentMonth = new Date().getMonth() + 1;
     const summaryRef = useRef<HTMLDivElement>(null);
-    const [ selectedMonth, setSelectedMonth ] = useState<number>(month ? month : currentMonth - 1);
+    const [ selectedMonth, setSelectedMonth ] = useState<number>(0);
     const [ summaryCard, setSummaryCard ] = useState<any>({
         isShow: false,
         isHovered: 0,
