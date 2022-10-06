@@ -55,7 +55,9 @@ const DetailPage = ({ title, data }: DetailPageProps): React.ReactElement => {
                                     className={isOpened === key ? 'accordion-item--is-focus' : ''}>
                                     <Accordion.Header>
                                         <div className="row justify-content-between align-items-center gy-1 gy-md-0 w-100">
-                                            <div className="col-md"><h4>{data.detail[key][0].title}</h4></div>
+                                            <div className="col-md">
+                                                <h4>{data.detail[key][0].title}{data.detail[key][0]?.venue ? ` | ${data.detail[key][0].venue}` : null}{data.detail[key][0]?.eventDate ? ` | ${data.detail[key][0].eventDate}` : null}</h4>
+                                            </div>
                                             <div className="col-md-auto">
                                                 <span className="text-success">{currencyConvert(summary.income, 'Rp')}</span> | <span className="text-danger">{currencyConvert(summary.expense, 'Rp', true)}</span>
                                             </div>
@@ -71,13 +73,23 @@ const DetailPage = ({ title, data }: DetailPageProps): React.ReactElement => {
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {data.detail[key].map((detail: any) => (
-                                                <tr key={key + detail.description}>
-                                                    <td>{detail.date}</td>
-                                                    <td>{detail.description}</td>
-                                                    <td className={`text-end${detail.type === 'income' ? ' text-success' : ' text-danger'}`}>{currencyConvert(detail.cashFlow, 'Rp', detail.type !== 'income')}</td>
-                                                </tr>
-                                            ))}
+                                            {data.detail[key].map((detail: any) => {
+                                                if (detail.type === 'notes') return (
+                                                    <tr key={key + detail.description}>
+                                                        <td
+                                                            colSpan={3}
+                                                            dangerouslySetInnerHTML={{ __html: detail.description.replace('\n', '<br />') }} />
+                                                    </tr>
+                                                );
+                                                
+                                                return (
+                                                    <tr key={key + detail.description}>
+                                                        <td>{detail.date}</td>
+                                                        <td>{detail.description}</td>
+                                                        <td className={`text-end${detail.type === 'income' ? ' text-success' : ' text-danger'}`}>{currencyConvert(detail.cashFlow, 'Rp', detail.type !== 'income')}</td>
+                                                    </tr>
+                                                );
+                                            })}
                                             </tbody>
                                         </table>
                                     </Accordion.Body>
