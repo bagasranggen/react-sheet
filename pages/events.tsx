@@ -15,7 +15,7 @@ export async function getStaticProps() {
 }
 
 type EventsProps = NextPage & {
-    data: Array<any>;
+    data: any;
 };
 
 const Events = ({ data }: EventsProps): React.ReactElement => (
