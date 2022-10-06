@@ -78,10 +78,10 @@ const DetailPage = ({ title, data }: DetailPageProps): React.ReactElement => {
                                                     <tr key={key + detail.description}>
                                                         <td
                                                             colSpan={3}
-                                                            dangerouslySetInnerHTML={{ __html: detail.description.replace('\n', '<br />') }} />
+                                                            dangerouslySetInnerHTML={{ __html: detail.description.replace(/\n/g, '<br />') }} />
                                                     </tr>
                                                 );
-                                                
+
                                                 return (
                                                     <tr key={key + detail.description}>
                                                         <td>{detail.date}</td>
