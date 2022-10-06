@@ -4,7 +4,7 @@ import currencyToInt from '../utils/currencyToInt';
 
 // credentials you have generated when creating the service account. TIP: DO NOT check this into your Git repo and it to your .gitignore file
 
-const getExpenseData = async (id: number, type: string) => {
+const getExpenseData = async (id: number, type: string, sort?: 'event' | 'non-event') => {
     // export async function getExpenseData() {
     // Create a document object using the ID of the spreadsheet - obtained from its URL.
     const doc = new GoogleSpreadsheet(process.env.SHEET_ID);
@@ -46,6 +46,7 @@ const getExpenseData = async (id: number, type: string) => {
                 });
 
             case 'detail':
+                const rowFiltered = sort === 'non-event' ? rows.filter((rf: any) => !rf?.event_venue) : rows.filter((rf: any) => rf?.event_venue);
                 let data: any = {
                     total: {
                         income: 0,
@@ -54,15 +55,17 @@ const getExpenseData = async (id: number, type: string) => {
                     detail: {},
                 };
 
-                rows.map((row: any) => {
+                rowFiltered.map((row: any) => {
                     const title = row.title.toLowerCase().replace(/ /g, '_');
 
                     const getDetailData = (data: any) => ({
                         title: data.title,
-                        type: data?.income ? 'income' : 'expense',
-                        date: data.date,
-                        description: data.description,
-                        cashFlow: data?.income ? currencyToInt(data.income) : (data?.charge ? (currencyToInt(data.charge) + currencyToInt(data.expense)) : currencyToInt(data.expense)),
+                        venue: data?.event_venue ? data?.event_venue : '',
+                        eventDate: data?.event_date ? data?.event_date : '',
+                        type: data?.income ? 'income' : (data?.expense ? 'expense' : 'notes'),
+                        date: data?.date ? data.date : '',
+                        description: data?.description ? data.description : '',
+                        cashFlow: data?.income ? currencyToInt(data.income) : (data?.charge ? (currencyToInt(data.charge) + currencyToInt(data.expense)) : data?.expense ? currencyToInt(data.expense) : 0),
                     });
 
                     if (!data.detail[title]?.length) {

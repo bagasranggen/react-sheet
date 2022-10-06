@@ -6,7 +6,7 @@ import getExpenseData from '../libs/expense';
 import DetailPage from '../components/container/detailPage/DetailPage';
 
 export async function getStaticProps() {
-    const data = await getExpenseData(2, 'detail');
+    const data = await getExpenseData(2, 'detail', 'non-event');
 
     return {
         props: { data },
@@ -20,7 +20,7 @@ type EventsProps = NextPage & {
 
 const Events = ({ data }: EventsProps): React.ReactElement => (
     <DetailPage
-        title="Detail By Events"
+        title="Detail For Non-Events"
         data={data} />
 );
 

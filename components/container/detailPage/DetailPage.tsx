@@ -15,7 +15,13 @@ const DetailPage = ({ title, data }: DetailPageProps): React.ReactElement => {
     const screen = screenResize();
     const [ isOpened, setIsOpened ] = useState<string>('');
 
-    const accordionClickHandler = (key: string) => key === isOpened ? setIsOpened('') : setIsOpened(key);
+    const accordionClickHandler = (e: any, key: string) => {
+        const classList = e.target.parentNode.classList;
+        const check = classList.contains('accordion-header__expense') || classList.contains('accordion-header__wrapper');
+
+        if (!check) return;
+        key === isOpened ? setIsOpened('') : setIsOpened(key);
+    };
 
     return (
         <>
@@ -51,12 +57,14 @@ const DetailPage = ({ title, data }: DetailPageProps): React.ReactElement => {
                                 <Accordion.Item
                                     key={key}
                                     eventKey={key}
-                                    onClick={() => accordionClickHandler(key)}
+                                    onClick={(e: any) => accordionClickHandler(e, key)}
                                     className={isOpened === key ? 'accordion-item--is-focus' : ''}>
                                     <Accordion.Header>
-                                        <div className="row justify-content-between align-items-center gy-1 gy-md-0 w-100">
-                                            <div className="col-md"><h4>{data.detail[key][0].title}</h4></div>
-                                            <div className="col-md-auto">
+                                        <div className="row justify-content-between align-items-center gy-1 gy-md-0 w-100 accordion-header__wrapper">
+                                            <div className="col-md accordion-header__title">
+                                                {data.detail[key][0].title}{data.detail[key][0]?.venue ? ` | ${data.detail[key][0].venue}` : null}{data.detail[key][0]?.eventDate ? ` | ${data.detail[key][0].eventDate}` : null}
+                                            </div>
+                                            <div className="col-md-auto accordion-header__expense">
                                                 <span className="text-success">{currencyConvert(summary.income, 'Rp')}</span> | <span className="text-danger">{currencyConvert(summary.expense, 'Rp', true)}</span>
                                             </div>
                                         </div>
@@ -71,13 +79,23 @@ const DetailPage = ({ title, data }: DetailPageProps): React.ReactElement => {
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {data.detail[key].map((detail: any) => (
-                                                <tr key={key + detail.description}>
-                                                    <td>{detail.date}</td>
-                                                    <td>{detail.description}</td>
-                                                    <td className={`text-end${detail.type === 'income' ? ' text-success' : ' text-danger'}`}>{currencyConvert(detail.cashFlow, 'Rp', detail.type !== 'income')}</td>
-                                                </tr>
-                                            ))}
+                                            {data.detail[key].map((detail: any) => {
+                                                if (detail.type === 'notes') return (
+                                                    <tr key={key + detail.description}>
+                                                        <td
+                                                            colSpan={3}
+                                                            dangerouslySetInnerHTML={{ __html: detail.description.replace(/\n/g, '<br />') }} />
+                                                    </tr>
+                                                );
+
+                                                return (
+                                                    <tr key={key + detail.description}>
+                                                        <td>{detail.date}</td>
+                                                        <td>{detail.description}</td>
+                                                        <td className={`text-end${detail.type === 'income' ? ' text-success' : ' text-danger'}`}>{currencyConvert(detail.cashFlow, 'Rp', detail.type !== 'income')}</td>
+                                                    </tr>
+                                                );
+                                            })}
                                             </tbody>
                                         </table>
                                     </Accordion.Body>

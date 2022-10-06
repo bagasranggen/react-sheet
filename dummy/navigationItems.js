@@ -7,14 +7,10 @@ const navigationItems = [
 		label: 'Events',
 		uri: '/events'
 	},
-	// {
-	// 	label: 'About Us',
-	// 	uri: '/'
-	// },
-	// {
-	// 	label: 'Contact',
-	// 	uri: '/'
-	// },
+	{
+		label: 'Non-Events',
+		uri: '/non-events'
+	},
 ];
 
 export default navigationItems;

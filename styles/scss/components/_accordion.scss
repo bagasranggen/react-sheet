@@ -24,9 +24,9 @@
     }
 
     &-header {
-        h4 {
-            @extend %mb-0;
+        &__title {
             font-weight: 400;
+            font-size: 2rem;
 
             @include media-breakpoint-down(md) {
                 font-size: 1.8rem;
