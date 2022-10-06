@@ -6,7 +6,7 @@ import getExpenseData from '../libs/expense';
 import DetailPage from '../components/container/detailPage/DetailPage';
 
 export async function getStaticProps() {
-    const data = await getExpenseData(2, 'detail');
+    const data = await getExpenseData(2, 'detail', 'event');
 
     return {
         props: { data },
