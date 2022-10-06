@@ -46,7 +46,7 @@ const getExpenseData = async (id: number, type: string, sort?: 'event' | 'non-ev
                 });
 
             case 'detail':
-                const rowFiltered = sort === 'non-event' ? rows.filter((rf: any) => !rf?.event_venue) : rows.filter((rf: any) => rf?.event_venue);
+                const rowFiltered = sort === 'non-event' ? rows.filter((rf: any) => !rf?.event_venue) : (sort === 'event' ? rows.filter((rf: any) => rf?.event_venue) : rows);
                 let data: any = {
                     total: {
                         income: 0,
