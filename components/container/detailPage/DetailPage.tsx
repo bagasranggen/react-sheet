@@ -9,9 +9,10 @@ import { Accordion } from 'react-bootstrap';
 type DetailPageProps = {
     title: string;
     data: any;
+    sort?: Object;
 }
 
-const DetailPage = ({ title, data }: DetailPageProps): React.ReactElement => {
+const DetailPage = ({ title, data, sort }: DetailPageProps): React.ReactElement => {
     const screen = screenResize();
     const [ isOpened, setIsOpened ] = useState<string>('');
 
@@ -46,7 +47,7 @@ const DetailPage = ({ title, data }: DetailPageProps): React.ReactElement => {
 
                 {Object.keys(data.detail).length > 0 ? (
                     <Accordion className={`my-2${isOpened !== '' ? ' accordion--is-focus' : ''}`}>
-                        {Object?.keys(data.detail).map((key: any) => {
+                        {Object?.keys(sort ? sort : data.detail).map((key: any) => {
                             let summary = { income: 0, expense: 0 };
 
                             data.detail[key].map((detail: any) => {
