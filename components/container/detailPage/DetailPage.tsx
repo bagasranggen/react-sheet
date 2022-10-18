@@ -18,7 +18,7 @@ const DetailPage = ({ title, data, sort }: DetailPageProps): React.ReactElement 
 
     const accordionClickHandler = (e: any, key: string) => {
         const classList = e.target.parentNode.classList;
-        const check = classList.contains('accordion-header__expense') || classList.contains('accordion-header__wrapper');
+        const check = classList.contains('accordion-header__expense') || classList.contains('accordion-header__wrapper') || classList.contains('accordion-header');
 
         if (!check) return;
         key === isOpened ? setIsOpened('') : setIsOpened(key);
