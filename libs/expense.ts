@@ -1,6 +1,7 @@
 // @ts-ignore
 import { GoogleSpreadsheet } from 'google-spreadsheet';
-import currencyToInt from '../utils/currencyToInt';
+import currencyToInt from './utils/currencyToInt';
+import { createExpenseData } from "./helper";
 
 // credentials you have generated when creating the service account. TIP: DO NOT check this into your Git repo and it to your .gitignore file
 
@@ -29,21 +30,25 @@ const getExpenseData = async (id: number, type: string) => {
 
             // returns data summary
             case 'summary':
-                return rows.map((row: any) => {
+                const summary: any = {};
+
+                rows.map((row: any) => {
                     const uri = (row?.year && row?.month) ? `${row.month.toLowerCase()}-${row.year}` : '';
 
-                    return {
-                        year: row?.year ? row.year : '',
-                        month: row?.month ? row.month : '',
-                        uri: uri ? uri : '',
-                        url: uri ? `/monthly/${uri}` : '',
-                        align: row?.align ? row.align : '',
-                        income: row?.income ? currencyToInt(row.income) : 0,
-                        expense: row?.expense ? currencyToInt(row.expense) : 0,
-                        profit: row?.profit ? currencyToInt(row.profit) : 0,
-                        isProfit: row?.profit ? currencyToInt(row.profit) > 0 : true
-                    };
+                    console.log(summary[row.year as keyof Object]);
+
+                    switch (typeof summary[row.year as keyof Object]) {
+                        case "undefined":
+                            summary[row.year as keyof Object] = [ createExpenseData(row) ];
+                            break;
+
+                        case "object":
+                            summary[row.year as keyof Object].push(createExpenseData(row));
+                            break;
+                    }
                 });
+
+                return summary;
 
             case 'detail':
                 let data: any = {

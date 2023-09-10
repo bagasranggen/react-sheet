@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import screenResize from '../../../utils/screenResize';
-import currencyConvert from '../../../utils/currencyConvert';
+import screenResize from '../../../libs/utils/screenResize';
+import currencyConvert from '../../../libs/utils/currencyConvert';
 
 import HeaderTitle from '../../layout/header/headetTitle/HeaderTitle';
 import { Accordion } from 'react-bootstrap';

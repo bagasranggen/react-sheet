@@ -2,19 +2,24 @@ import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import currencyConvert from '../../../utils/currencyConvert';
-import screenResize from '../../../utils/screenResize';
+import currencyConvert from '../../../libs/utils/currencyConvert';
+import screenResize from '../../../libs/utils/screenResize';
 
 import chevron from '../../../assets/icon/chevron-right-dark.svg';
+import Input from "../input/Input";
+import { OptionItemProps } from "../input/inputSelect/InputSelect";
 
 export type CircleSummaryProps = {
-    summaryData: Array<any>;
+    summaryData: any;
+    year: string;
+    yearList: OptionItemProps[];
 };
 
-const CircleSummary = ({ summaryData }: CircleSummaryProps): React.ReactElement => {
+const CircleSummary = ({ summaryData, year, yearList }: CircleSummaryProps): React.ReactElement => {
     const screen = screenResize();
     const currentMonth = new Date().getMonth() + 1;
     const summaryRef = useRef<HTMLDivElement>(null);
+    const [ currentYear, setCurrentYear ] = useState<string>(year);
     const [ selectedMonth, setSelectedMonth ] = useState<number>(0);
     const [ summaryCard, setSummaryCard ] = useState<any>({
         isShow: false,
@@ -25,8 +30,10 @@ const CircleSummary = ({ summaryData }: CircleSummaryProps): React.ReactElement 
         left: 0,
     });
 
+    const summary = summaryData[currentYear as keyof Object];
+
     let currentCash: number = 0;
-    summaryData.map((sm: any) => currentCash += sm.profit);
+    summary.map((sm: any) => currentCash += sm.profit);
 
     let summaryStyle = {
         top: summaryCard.top - 15,
@@ -62,18 +69,22 @@ const CircleSummary = ({ summaryData }: CircleSummaryProps): React.ReactElement 
         }
     };
 
+    const yearSelectorHandler = (e: any) => {
+        setCurrentYear(e.target.value);
+    };
+
     useEffect(() => {
         setSummaryCard({ ...summaryCard, ...{ width: summaryRef.current?.offsetWidth } });
     }, [ selectedMonth ]);
 
     return (
-        <div className={`circle-summary${currentMonth > 1 ? ` circle-summary--${currentMonth - 1}` : ''}`}>
+        <div className={`circle-summary${currentMonth > 1 ? ` circle-summary--${currentYear === yearList.at(-1)?.value ? currentMonth - 1 : 12}` : ''}`}>
 
             {screen > 992 && (
                 <>
                     <div className="circle-summary__wrapper">
                         <ul className="list-circle">
-                            {summaryData.map((m: any, i: number) => (
+                            {summary.map((m: any, i: number) => (
                                 <Link
                                     key={m.uri}
                                     href={m.url}>
@@ -106,9 +117,9 @@ const CircleSummary = ({ summaryData }: CircleSummaryProps): React.ReactElement 
                         <table className="table table-responsive">
                             <tbody>
                             <tr>
-                                <td className="text-success">{currencyConvert(summaryData[selectedMonth].income, 'Rp')}</td>
-                                <td className="text-danger">{currencyConvert(summaryData[selectedMonth].expense, 'Rp', true)}</td>
-                                <td className={`text-${summaryData[selectedMonth].isProfit ? 'success' : 'danger'}`}>{currencyConvert(summaryData[selectedMonth].profit, 'Rp', !summaryData[selectedMonth].isProfit)}</td>
+                                <td className="text-success">{currencyConvert(summary[selectedMonth].income, 'Rp')}</td>
+                                <td className="text-danger">{currencyConvert(summary[selectedMonth].expense, 'Rp', true)}</td>
+                                <td className={`text-${summary[selectedMonth].isProfit ? 'success' : 'danger'}`}>{currencyConvert(summary[selectedMonth].profit, 'Rp', !summary[selectedMonth].isProfit)}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -117,6 +128,13 @@ const CircleSummary = ({ summaryData }: CircleSummaryProps): React.ReactElement 
             )}
 
             <div className="circle-summary__text">
+                <Input
+                    type="select"
+                    value={year}
+                    options={yearList}
+                    events={{
+                        onChange: yearSelectorHandler,
+                    }} />
                 <p>Current Cash</p>
                 <h1 className="mb-0"><small>{currentCash < 0 ? '-' : ''}Rp</small>{currencyConvert(currentCash)}</h1>
             </div>
@@ -125,7 +143,7 @@ const CircleSummary = ({ summaryData }: CircleSummaryProps): React.ReactElement 
                 <div className="my-3 row justify-content-center">
                     <div className="col-md-8">
                         <ul className="circle-summary__list">
-                            {summaryData.map((m: any) => {
+                            {summary.map((m: any) => {
                                 if (m.income === 0 && m.expense === 0) return;
                                 return (
                                     <Link
