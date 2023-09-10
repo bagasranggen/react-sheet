@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from "next/router";
 import type { NextPage } from 'next';
 
 import getExpenseData from '../libs/expense';
@@ -28,6 +29,14 @@ type HomeProps = NextPage & {
 };
 
 const Home = ({ data, year }: HomeProps): React.ReactElement => {
+    const { query } = useRouter();
+    const [ y, setY ] = useState(query?.year ?? year.current.toString());
+
+    useEffect(() => {
+        if (!query.year) return;
+        setY(query.year);
+    }, [ query ]);
+
     return (
         <>
             <HeaderTitle
@@ -37,7 +46,7 @@ const Home = ({ data, year }: HomeProps): React.ReactElement => {
             <div className="container container--full-vh">
                 <CircleSummary
                     summaryData={data}
-                    year={year.current.toString()}
+                    year={y}
                     yearList={year.list} />
             </div>
         </>

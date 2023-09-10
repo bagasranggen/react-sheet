@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from "next/router";
 
 import currencyConvert from '../../../libs/utils/currencyConvert';
 import screenResize from '../../../libs/utils/screenResize';
@@ -17,6 +18,7 @@ export type CircleSummaryProps = {
 
 const CircleSummary = ({ summaryData, year, yearList }: CircleSummaryProps): React.ReactElement => {
     const screen = screenResize();
+    const router = useRouter();
     const currentMonth = new Date().getMonth() + 1;
     const summaryRef = useRef<HTMLDivElement>(null);
     const [ currentYear, setCurrentYear ] = useState<string>(year);
@@ -71,7 +73,14 @@ const CircleSummary = ({ summaryData, year, yearList }: CircleSummaryProps): Rea
 
     const yearSelectorHandler = (e: any) => {
         setCurrentYear(e.target.value);
+        router.push({
+            query: { year: e.target.value },
+        }, undefined, { shallow: true });
     };
+
+    useEffect(() => {
+        setCurrentYear(year);
+    }, [ year ]);
 
     useEffect(() => {
         setSummaryCard({ ...summaryCard, ...{ width: summaryRef.current?.offsetWidth } });
@@ -93,7 +102,8 @@ const CircleSummary = ({ summaryData, year, yearList }: CircleSummaryProps): Rea
                                             type="radio"
                                             name="expenses-summary"
                                             id={`expense${m.uri}`}
-                                            defaultChecked={i === (currentMonth - 1)}
+                                            {...currentYear === yearList.at(-1)?.value && { defaultChecked: i === (currentMonth - 1) }}
+                                            // defaultChecked={i === (currentMonth - 1)}
                                             value={i}
                                             hidden />
                                         <label
@@ -130,6 +140,7 @@ const CircleSummary = ({ summaryData, year, yearList }: CircleSummaryProps): Rea
             <div className="circle-summary__text">
                 <Input
                     type="select"
+                    className="mb-1"
                     value={year}
                     options={yearList}
                     events={{

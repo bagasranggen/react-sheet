@@ -34,6 +34,7 @@
         &__text {
             @extend %text-center;
 
+            z-index: 5;
             @include media-breakpoint-up(lg) {
                 position: absolute;
                 top: 50%;
@@ -41,6 +42,12 @@
                 transform: translate(-50%, -50%);
 
                 margin-top: 2.5rem;
+            }
+
+            .input-select {
+                @extend %mx-auto;
+
+                max-width: 130px;
             }
 
             p {
@@ -83,7 +90,7 @@
             @extend %position-absolute;
             background-color: $white;
             padding: 1rem;
-            z-index: 3;
+            z-index: 1090;
             pointer-events: none;
 
             &:not(.circle-summary__card--show) {

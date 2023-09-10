@@ -1,7 +1,7 @@
 // @ts-ignore
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import currencyToInt from './utils/currencyToInt';
-import { createExpenseData } from "./helper";
+import { createDetailData, createExpenseData } from "./helper";
 
 // credentials you have generated when creating the service account. TIP: DO NOT check this into your Git repo and it to your .gitignore file
 
@@ -30,13 +30,9 @@ const getExpenseData = async (id: number, type: string) => {
 
             // returns data summary
             case 'summary':
-                const summary: any = {};
+                let summary: any = {};
 
                 rows.map((row: any) => {
-                    const uri = (row?.year && row?.month) ? `${row.month.toLowerCase()}-${row.year}` : '';
-
-                    console.log(summary[row.year as keyof Object]);
-
                     switch (typeof summary[row.year as keyof Object]) {
                         case "undefined":
                             summary[row.year as keyof Object] = [ createExpenseData(row) ];
@@ -60,20 +56,12 @@ const getExpenseData = async (id: number, type: string) => {
                 };
 
                 rows.map((row: any) => {
-                    const title = row.title.toLowerCase().replace(/ /g, '_');
-
-                    const getDetailData = (data: any) => ({
-                        title: data.title,
-                        type: data?.income ? 'income' : 'expense',
-                        date: data.date,
-                        description: data.description,
-                        cashFlow: data?.income ? currencyToInt(data.income) : (data?.charge ? (currencyToInt(data.charge) + currencyToInt(data.expense)) : currencyToInt(data.expense)),
-                    });
+                    const title = row?.title?.toLowerCase()?.replace(/ /g, '_');
 
                     if (!data.detail[title]?.length) {
-                        data.detail[title] = [ getDetailData(row) ];
+                        data.detail[title] = [ createDetailData(row) ];
                     } else {
-                        data.detail[title].push(getDetailData(row));
+                        data.detail[title].push(createDetailData(row));
                     }
 
                     data.total.income += (row?.income) ? currencyToInt(row.income) : 0;
